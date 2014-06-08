@@ -3,5 +3,6 @@ MemInspector
 
 Memory viewer on Pascal!
 
-       NOTICE
+!!!NOTICE!!!
+
 If you want English version, please send me a mail on hackfeed@inbox.ru
