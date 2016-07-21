@@ -14,7 +14,7 @@ begin
   WriteLn (' ------------------------------------------------------------------------------');
   WriteLn (' MemInspector v.1.1 by HackFeed. All rights reserved!');
   GotoXY (1,5);
-  Write (' Change drive: ');
+  Write (' Choose drive: ');
   ReadLn (d);
   WriteLn();
   stop := false;
