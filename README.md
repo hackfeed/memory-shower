@@ -1,4 +1,4 @@
 MemInspector
 ============
 
-Memory viewer on Pascal
+Memory analysis utility on C#/Pascal
