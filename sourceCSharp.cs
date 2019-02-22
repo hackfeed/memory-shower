@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 
-class MemShow
+class MemoryShower
 {
     public static void Main()
     {
-        Console.Title = "MemInspector v2.0";
+        Console.Title = "MemoryShower";
         Console.WriteLine();
         DriveInfo[] allDrives = DriveInfo.GetDrives();
 
@@ -13,23 +13,24 @@ class MemShow
         {
             if (d.IsReady)
             {
-                Console.WriteLine(" Диск {0}", d.Name);
-                Console.WriteLine("  Название раздела        : {0}", d.VolumeLabel);
-                Console.WriteLine("  Файловая система        : {0}", d.DriveFormat);
+                Console.WriteLine($" Диск {d.Name}");
+                Console.WriteLine($"  Название раздела        : {d.VolumeLabel}");
+                Console.WriteLine($"  Файловая система        : {d.DriveFormat}");
                 Console.WriteLine(
-                    "  Доступно места на диске : {0} байт, {1} кбайт,\n " +
-                    "                           {2} мбайт, {3} гбайт.",
-                    d.TotalFreeSpace, d.TotalFreeSpace / 1024, d.TotalFreeSpace / 1048576, d.TotalFreeSpace / 1073741824);
+                   $"  Доступно места на диске : {d.TotalFreeSpace} байт,\n" +
+                   $"                            {Rounder(d.TotalFreeSpace / Powder(2,10))} кбайт,\n" +
+                   $"                            {Rounder(d.TotalFreeSpace / Powder(2,20))} мбайт,\n" +
+                   $"                            {Rounder(d.TotalFreeSpace / Powder(2,30))} гбайт.");
                 Console.WriteLine(
-                    "  Занято места на диске   : {0} байт, {1} кбайт,\n " +
-                    "                           {2} мбайт, {3} гбайт.",
-                    d.TotalSize - d.TotalFreeSpace, (d.TotalSize - d.TotalFreeSpace) / 1024,
-                    (d.TotalSize - d.TotalFreeSpace) / 1048576,
-                    (d.TotalSize - d.TotalFreeSpace) / 1073741824);
+                   $"  Занято места на диске   : {d.TotalSize - d.TotalFreeSpace} байт,\n" +
+                   $"                            {Rounder((d.TotalSize - d.TotalFreeSpace) / Powder(2,10))} кбайт,\n" +
+                   $"                            {Rounder((d.TotalSize - d.TotalFreeSpace) / Powder(2,20))} мбайт,\n" +
+                   $"                            {Rounder((d.TotalSize - d.TotalFreeSpace) / Powder(2,30))} гбайт.");
                 Console.WriteLine(
-                    "  Полный размер диска     : {0} байт, {1} кбайт,\n " +
-                    "                           {2} мбайт, {3} гбайт.",
-                    d.TotalSize, d.TotalSize / 1024, d.TotalSize / 1048576, d.TotalSize / 1073741824);
+                   $"  Полный размер диска     : {d.TotalSize} байт,\n" +
+                   $"                            {Rounder(d.TotalSize / Powder(2,10))} кбайт,\n" +
+                   $"                            {Rounder(d.TotalSize / Powder(2,20))} мбайт,\n" +
+                   $"                            {Rounder(d.TotalSize / Powder(2,30))} гбайт.");
                 Console.WriteLine(" ---------------------------------------------------------------");
             }
         }
@@ -37,4 +38,7 @@ class MemShow
         Console.WriteLine(" Нажмите любую клавишу для выхода из программы...");
         Console.ReadKey();
     }
+
+    private static double Powder(double a, double b) => Math.Pow(a, b);
+    private static double Rounder(double a) => Math.Round(a, 1);
 }
